@@ -3,6 +3,7 @@ package com.allstate.payments.control;
 import com.allstate.payments.domain.CreditCardTransaction;
 import com.allstate.payments.service.PaymentsService;
 import com.allstate.payments.service.PaymentsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,16 @@ public class PaymentsController {
 
     PaymentsService paymentsService;
 
-    //dependency injection
-    public PaymentsController(PaymentsService paymentsService) {
+    @Autowired
+    public void setPaymentsService(PaymentsService paymentsService) {
         this.paymentsService = paymentsService;
     }
+
+
+    //dependency injection
+//    public PaymentsController(PaymentsService paymentsService) {
+//        this.paymentsService = paymentsService;
+//    }
 
     @GetMapping()
     public List<CreditCardTransaction> getAll() {
