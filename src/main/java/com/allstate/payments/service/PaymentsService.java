@@ -11,5 +11,6 @@ public interface PaymentsService {
     public List<CreditCardTransaction> getAllTransactionsForCountry(String country);
     public List<CreditCardTransaction> getAllTransactionsForOrderId(String orderId);
     public CreditCardTransaction getTransactionById(Integer id);
+    public CreditCardTransaction add(CreditCardTransaction transaction);
 
 }

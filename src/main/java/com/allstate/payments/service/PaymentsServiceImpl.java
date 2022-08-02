@@ -51,4 +51,10 @@ public class PaymentsServiceImpl implements PaymentsService{
         }
         throw new TransactionNotFoundException("There is no transaction with an ID of " + id);
     }
+
+
+    @Override
+    public CreditCardTransaction add(CreditCardTransaction transaction) {
+        return creditCardTransactionRepository.save(transaction);
+    }
 }

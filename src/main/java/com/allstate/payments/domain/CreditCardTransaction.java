@@ -116,4 +116,18 @@ public class CreditCardTransaction {
     }
 
 
+    @Override
+    public String toString() {
+        return "CreditCardTransaction{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", country='" + country + '\'' +
+                ", currency='" + currency + '\'' +
+                ", date=" + date +
+                ", orderId='" + orderId + '\'' +
+                ", taxCode=" + taxCode +
+                ", taxRate=" + taxRate +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

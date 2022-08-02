@@ -58,4 +58,10 @@ public class PaymentsController {
         results.put("volume", volume.toString());
         return results;
     }
+
+    @PostMapping
+    public CreditCardTransaction addTransaction(@RequestBody CreditCardTransaction newTransaction) {
+        return paymentsService.add(newTransaction);
+    }
+
 }
