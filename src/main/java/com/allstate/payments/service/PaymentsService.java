@@ -8,5 +8,6 @@ public interface PaymentsService {
 
     public List<CreditCardTransaction> getAllTransactions();
     public int countTransactions();
+    public List<CreditCardTransaction> getAllTransactionsForCountry(String country);
 
 }

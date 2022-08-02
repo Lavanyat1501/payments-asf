@@ -24,4 +24,9 @@ public class PaymentsServiceImpl implements PaymentsService{
     public int countTransactions() {
         return creditCardTransactionRepository.findAll().size();
     }
+
+    @Override
+    public List<CreditCardTransaction> getAllTransactionsForCountry(String country) {
+        return creditCardTransactionRepository.findAllByCountry(country);
+    }
 }

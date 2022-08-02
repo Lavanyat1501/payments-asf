@@ -4,10 +4,7 @@ import com.allstate.payments.domain.CreditCardTransaction;
 import com.allstate.payments.service.PaymentsService;
 import com.allstate.payments.service.PaymentsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,8 +31,13 @@ public class PaymentsController {
 //    }
 
     @GetMapping()
-    public List<CreditCardTransaction> getAll() {
-        return paymentsService.getAllTransactions();
+    public List<CreditCardTransaction> getAll(@RequestParam(value="country", required=false) String country) {
+        if (country == null) {
+            return paymentsService.getAllTransactions();
+        }
+        else {
+            return paymentsService.getAllTransactionsForCountry(country);
+        }
     }
 
     @GetMapping("/volume")
