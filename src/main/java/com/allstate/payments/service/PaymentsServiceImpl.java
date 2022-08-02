@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PaymentsServiceImpl implements PaymentsService{
@@ -27,6 +28,21 @@ public class PaymentsServiceImpl implements PaymentsService{
 
     @Override
     public List<CreditCardTransaction> getAllTransactionsForCountry(String country) {
+
+//        return creditCardTransactionRepository.findAll()
+//                .stream().filter( trans -> trans.getCountry().equals(country))
+//                .collect(Collectors.toList());
+
         return creditCardTransactionRepository.findAllByCountry(country);
+    }
+
+    @Override
+    public List<CreditCardTransaction> getAllTransactionsForOrderId(String orderId) {
+        return creditCardTransactionRepository.findAllByOrderId(orderId);
+    }
+
+    @Override
+    public CreditCardTransaction getTransactionById(Integer id) {
+        return creditCardTransactionRepository.findById(id).get();
     }
 }

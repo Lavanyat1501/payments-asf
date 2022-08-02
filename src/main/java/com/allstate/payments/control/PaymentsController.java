@@ -31,14 +31,24 @@ public class PaymentsController {
 //    }
 
     @GetMapping()
-    public List<CreditCardTransaction> getAll(@RequestParam(value="country", required=false) String country) {
-        if (country == null) {
-            return paymentsService.getAllTransactions();
-        }
-        else {
+    public List<CreditCardTransaction> getAll(@RequestParam(value="country", required=false) String country,
+                                              @RequestParam(value="orderId", required=false) String orderId) {
+        if (country != null) {
             return paymentsService.getAllTransactionsForCountry(country);
         }
+        else if (orderId != null) {
+            return paymentsService.getAllTransactionsForOrderId(orderId);
+        }
+
+        return paymentsService.getAllTransactions();
+
     }
+
+    @GetMapping("/{id}")
+    public CreditCardTransaction getById(@PathVariable("id") Integer id) {
+        return paymentsService.getTransactionById(id);
+    }
+
 
     @GetMapping("/volume")
     public Map<String, String> getNumberOfPayments() {
