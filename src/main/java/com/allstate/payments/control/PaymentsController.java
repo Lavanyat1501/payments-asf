@@ -64,4 +64,11 @@ public class PaymentsController {
         return paymentsService.add(newTransaction);
     }
 
+    @PutMapping("/{id}")
+    public CreditCardTransaction updateTransaction(@PathVariable("id") Integer id,
+                                                   @RequestBody Map<String, String> data) {
+
+        return paymentsService.updateTransaction(id, data);
+    }
+
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -66,5 +67,19 @@ public class PaymentsServiceImpl implements PaymentsService{
         catch (Exception e) {
             throw new InvalidNewTransactionException("We were unable to save your transaction");
         }
+    }
+
+    @Override
+    public CreditCardTransaction updateTransaction(Integer id, Map<String, String> data) {
+        CreditCardTransaction transaction = getTransactionById(id);
+        if (data.containsKey("amount")) transaction.setAmount(Double.parseDouble(data.get("amount")));
+        if (data.containsKey("country")) transaction.setCountry(data.get("country"));
+        if (data.containsKey("currency")) transaction.setCurrency(data.get("currency"));
+        if (data.containsKey("date")) transaction.setDate(LocalDate.parse(data.get("date")));
+        if (data.containsKey("orderId")) transaction.setOrderId(data.get("orderId"));
+        if (data.containsKey("taxCode")) transaction.setTaxCode(Integer.parseInt(data.get("taxCode")));
+        if (data.containsKey("taxRate")) transaction.setTaxRate(Double.parseDouble(data.get("taxRate")));
+        if (data.containsKey("type")) transaction.setType(data.get("type"));
+        return creditCardTransactionRepository.save(transaction);
     }
 }
