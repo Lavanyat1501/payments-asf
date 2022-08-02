@@ -2,6 +2,7 @@ package com.allstate.payments.service;
 
 import com.allstate.payments.data.CreditCardTransactionRepository;
 import com.allstate.payments.domain.CreditCardTransaction;
+import com.allstate.payments.exceptions.InvalidNewTransactionException;
 import com.allstate.payments.exceptions.TransactionNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,15 @@ public class PaymentsServiceImpl implements PaymentsService{
 
     @Override
     public CreditCardTransaction add(CreditCardTransaction transaction) {
-        return creditCardTransactionRepository.save(transaction);
+
+        if(transaction.getOrderId() == null || transaction.getTaxCode() ==null) {
+            throw new InvalidNewTransactionException("Order Id and Tax Code must be provided");
+        }
+        try {
+            return creditCardTransactionRepository.save(transaction);
+        }
+        catch (Exception e) {
+            throw new InvalidNewTransactionException("We were unable to save your transaction");
+        }
     }
 }
