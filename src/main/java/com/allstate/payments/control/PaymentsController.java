@@ -4,6 +4,7 @@ import com.allstate.payments.domain.CreditCardTransaction;
 import com.allstate.payments.service.PaymentsService;
 import com.allstate.payments.service.PaymentsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -44,7 +45,7 @@ public class PaymentsController {
 
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value ="/{id}", produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public CreditCardTransaction getById(@PathVariable("id") Integer id) {
         return paymentsService.getTransactionById(id);
     }
