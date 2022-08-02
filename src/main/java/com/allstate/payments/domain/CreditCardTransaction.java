@@ -2,17 +2,29 @@ package com.allstate.payments.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name="cctransactions")
 public class CreditCardTransaction {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private Double amount;
     private String country;
     private String currency;
     private LocalDate date;
+
+    @Column(name="order_id")
     private String orderId;
+
+    @Column(name="tax_code")
     private Integer taxCode;
+
+    @Column(name="tax_rate")
     private Double taxRate;
     private String type;
 
