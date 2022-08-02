@@ -7,12 +7,12 @@ import java.util.Map;
 
 public interface PaymentsService {
 
-    public List<CreditCardTransaction> getAllTransactions();
-    public int countTransactions();
-    public List<CreditCardTransaction> getAllTransactionsForCountry(String country);
-    public List<CreditCardTransaction> getAllTransactionsForOrderId(String orderId);
-    public CreditCardTransaction getTransactionById(Integer id);
-    public CreditCardTransaction add(CreditCardTransaction transaction);
-    public CreditCardTransaction updateTransaction(Integer id, Map<String,String> data);
+    List<CreditCardTransaction> getAllTransactions();
+    int countTransactions();
+    List<CreditCardTransaction> getAllTransactionsForCountry(String country);
+    List<CreditCardTransaction> getAllTransactionsForOrderId(String orderId);
+    CreditCardTransaction getTransactionById(Integer id);
+    CreditCardTransaction add(CreditCardTransaction transaction);
+    CreditCardTransaction updateTransaction(Integer id, Map<String,String> data);
 
 }
