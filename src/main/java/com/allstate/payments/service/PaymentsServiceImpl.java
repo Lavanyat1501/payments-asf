@@ -5,6 +5,8 @@ import com.allstate.payments.domain.CreditCardTransaction;
 import com.allstate.payments.dtos.CreditCardTransactionDTO;
 import com.allstate.payments.exceptions.InvalidNewTransactionException;
 import com.allstate.payments.exceptions.TransactionNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class PaymentsServiceImpl implements PaymentsService{
 
     @Autowired
     private CreditCardTransactionRepository creditCardTransactionRepository;
+
+    Logger logger = LoggerFactory.getLogger(PaymentsService.class);
+
 
     @Override
     public List<CreditCardTransaction> getAllTransactions() {
@@ -52,6 +57,7 @@ public class PaymentsServiceImpl implements PaymentsService{
         if (optionalCCT.isPresent()) {
             return optionalCCT.get();
         }
+        logger.info("There is no transaction with an ID of " + id);
         throw new TransactionNotFoundException("There is no transaction with an ID of " + id);
     }
 
