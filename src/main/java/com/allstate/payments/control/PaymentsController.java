@@ -1,6 +1,7 @@
 package com.allstate.payments.control;
 
 import com.allstate.payments.domain.CreditCardTransaction;
+import com.allstate.payments.dtos.CreditCardTransactionDTO;
 import com.allstate.payments.service.PaymentsService;
 import com.allstate.payments.service.PaymentsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class PaymentsController {
     }
 
     @PostMapping
-    public CreditCardTransaction addTransaction(@RequestBody CreditCardTransaction newTransaction) {
+    public CreditCardTransaction addTransaction(@RequestBody CreditCardTransactionDTO newTransaction) {
         return paymentsService.add(newTransaction);
     }
 
