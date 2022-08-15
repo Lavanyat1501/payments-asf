@@ -1,7 +1,9 @@
 package com.allstate.payments.unittests;
 
 import com.allstate.payments.control.PaymentsController;
+import com.allstate.payments.domain.CreditCardTransaction;
 import com.allstate.payments.service.PaymentsService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -30,13 +32,24 @@ public class ControllerTests {
     @MockBean
     PaymentsService paymentsService;
 
+    @BeforeEach
+    public void runFirst() {
+        Mockito.when(paymentsService.countTransactions())
+                .thenReturn(116);
+        Mockito.when(paymentsService.getTransactionById(1))
+                .thenReturn(new CreditCardTransaction());
+    }
+
     @Test
     public void checkThatNumberOfTransactionsIsAMapWithAKeyOfVolume() {
-        Mockito.when(paymentsService.countTransactions())
-                        .thenReturn(116);
         Map<String,String> result = paymentsController.getNumberOfPayments();
         assertEquals("116", result.get("volume"));
     }
 
+    @Test
+    public void checkThatNumberOfTransactionsIsAMapWithAKeyOfVolume2() {
+        Map<String,String> result = paymentsController.getNumberOfPayments();
+        assertEquals("116", result.get("volume"));
+    }
 
 }
